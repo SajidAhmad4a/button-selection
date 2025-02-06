@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Selection</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: 50px;
+        }
+        button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: gray;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Select an Option</h2>
+    
+    <button id="btn1" onclick="handleClick(1, 'https://foul-shad-a2a.notion.site/ChatGPT-20k-Prompts-No-coding-18792648049d8017bb6ff06127655fd2?pvs=4')">Option 1</button>
+    <button id="btn2" onclick="handleClick(2, 'https://example.com/link2')">Option 2</button>
+    <button id="btn3" onclick="handleClick(3, 'https://example.com/link3')">Option 3</button>
+    <button id="btn4" onclick="handleClick(4, 'https://example.com/link4')">Option 4</button>
+
+    <script>
+        function handleClick(option, url) {
+            // Store the selected option in localStorage
+            localStorage.setItem("selectedOption", option);
+
+            // Disable all buttons so the user can't select any other option
+            disableAllButtons();
+
+            // Redirect to the selected option's link
+            window.location.href = url;
+        }
+
+        function disableAllButtons() {
+            document.getElementById("btn1").disabled = true;
+            document.getElementById("btn2").disabled = true;
+            document.getElementById("btn3").disabled = true;
+            document.getElementById("btn4").disabled = true;
+        }
+
+        function checkPreviousSelection() {
+            let selectedOption = localStorage.getItem("selectedOption");
+            
+            // If an option was already selected, disable all buttons
+            if (selectedOption) {
+                disableAllButtons();
+            }
+        }
+
+        // Check the previous selection when the page loads
+        checkPreviousSelection();
+    </script>
+
+</body>
+</html>
