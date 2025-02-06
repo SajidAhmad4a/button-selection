@@ -36,26 +36,34 @@
             // Store the selected option in localStorage
             localStorage.setItem("selectedOption", option);
 
-            // Disable all buttons so the user can't select any other option
-            disableAllButtons();
+            // Disable all buttons except the one that was clicked
+            disableOtherButtons(option);
 
             // Redirect to the selected option's link
             window.location.href = url;
         }
 
-        function disableAllButtons() {
-            document.getElementById("btn1").disabled = true;
-            document.getElementById("btn2").disabled = true;
-            document.getElementById("btn3").disabled = true;
-            document.getElementById("btn4").disabled = true;
+        function disableOtherButtons(selectedOption) {
+            let buttons = {
+                1: document.getElementById("btn1"),
+                2: document.getElementById("btn2"),
+                3: document.getElementById("btn3"),
+                4: document.getElementById("btn4"),
+            };
+
+            // Disable all buttons except the selected one
+            for (let key in buttons) {
+                if (parseInt(key) !== selectedOption) {
+                    buttons[key].disabled = true;
+                }
+            }
         }
 
         function checkPreviousSelection() {
             let selectedOption = localStorage.getItem("selectedOption");
-            
-            // If an option was already selected, disable all buttons
+
             if (selectedOption) {
-                disableAllButtons();
+                disableOtherButtons(parseInt(selectedOption));
             }
         }
 
